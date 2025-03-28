@@ -148,11 +148,17 @@ for card in store_cards:
     try:
         name = card.find_element(By.CLASS_NAME, "qBF1Pd").text
         raw_info = card.text.replace(name, "").strip()
+        lines = card.text.split("\n")
 
+        # Guess: address is usually line 2 or 3
+        address = lines[1] if len(lines) > 1 else "No address found"
+
+        # Keyword filtering
         if any(keyword in raw_info.lower() for keyword in keywords):
-            output += f"✅ 🏬 {name}\n📄 {raw_info}\n\n"
+            output += f"✅ 🏬 {name}\n📍 {address}\n📄 {raw_info}\n\n"
         else:
             continue
+
 
     except Exception as e:
         print("⚠️ Skipped a card due to error:", e)
