@@ -16,7 +16,8 @@ except:
     pass
 
 search_box = driver.find_element(By.NAME, "q")
-search_box.send_keys("bread near me")
+query = input("🔍 Enter your search: ")
+search_box.send_keys(query)
 search_box.send_keys(Keys.RETURN)
 time.sleep(5)
 
